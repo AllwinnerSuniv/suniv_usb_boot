@@ -4,7 +4,7 @@
 
 This firmware used to booting up device though usb (sunxi-fel)
 
-This routine used to done things blow:
+This routine used to do things like:
 ```
 1) Write Uboot Kernel Rootfs into memory and start
 2) in kernel, simulate SPI NAND as a usb mass storage device
