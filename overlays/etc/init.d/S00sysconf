@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# buff/cache autoclean
+printf "setting up min_free_kbytes to 8192\n"
+echo 8192 > /proc/sys/vm/min_free_kbytes
+
+echo heartbeat > /sys/class/leds/status_led/trigger
+
