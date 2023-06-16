@@ -13,6 +13,11 @@ This routine used to do things like:
    so you can come to the pc side, use `dd` command to program the flash
 ```
 
+## TODO list
+
+- [ ] add sunxi-fel binary and script for Windows platform
+- [ ] add support for MMC device
+
 ## Version info
 | routine | version |
 | ------- | ------- |
