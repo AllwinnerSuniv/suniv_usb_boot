@@ -2,6 +2,8 @@
     Suniv USB Boot
 </h1>
 
+## Well
+
 This firmware used to booting up device though usb (sunxi-fel)
 
 This routine used to do things like:
@@ -14,9 +16,9 @@ This routine used to do things like:
 ## Version info
 | routine | version |
 | ------- | ------- |
-| u-boot | v2018.01 |
-| kernel | 6.3.7-stable |
-| buildroot | v2023.4 |
+| u-boot | [v2018.01](https://github.com/Lichee-Pi/u-boot) |
+| kernel | [6.3.7-stable](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.3.7.tar.xz) |
+| buildroot | [v2023.2](https://buildroot.org/downloads/buildroot-2023.02.tar.gz) |
 
 ## Dirs
 | Dir | define |
@@ -25,6 +27,41 @@ This routine used to do things like:
 | backups | original firmware collected from internet |
 | overlays | for buildroot overlay, some scripts and kenrel modules |
 
+## Build
+
+if you want develop things based on this project
+
+Get toolchain
+```
+wget http://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/arm-linux-gnueabi/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz
+```
+
+
+```
+1) downlaod things in version info title
+2) use configs i was provided in configs/ dir
+```
+
+i'll give more infomation about this, but not for now.
+
+## Memory Usage
+```
+# free -h
+              total        used        free      shared  buff/cache   available
+Mem:          26.9M        4.0M       15.2M        8.0K        7.7M        4.3M
+Swap:             0           0           0
+```
+
+## Suggestion
+
+When you program the flash, you better split the file into servral pieces, like 128MB to 16 x 8MB like this:
+```
+# A 8MB window loop
+# 1 block = 512 byte
+sudo dd if=firmware.bin of=/dev/sda skip=0 count=16384
+sudo dd if=firmware.bin of=/dev/sda skip=16384 count=37268
+```
+a full dd write may cause OOM problem because the kernel `buff/cache` feature.
 
 ## Booting log
 ```
@@ -155,3 +192,8 @@ Welcome to NINJAR system
 ninjar login: [    4.841899] random: crng init done
 
 ```
+
+
+<h2 align="center">
+    Present by <a href="https://embeddedboys.github.io/">embeddedboys</a>
+</h2>
