@@ -8,7 +8,3 @@ kernel/drivers/mtd/tests/mtd_subpagetest.ko:
 kernel/drivers/mtd/tests/mtd_torturetest.ko:
 kernel/drivers/mtd/tests/mtd_nandecctest.ko:
 kernel/drivers/mtd/tests/mtd_nandbiterrs.ko:
-kernel/drivers/usb/gadget/function/usb_f_mass_storage.ko: kernel/drivers/usb/gadget/libcomposite.ko
-kernel/drivers/usb/gadget/legacy/g_mass_storage.ko: kernel/drivers/usb/gadget/function/usb_f_mass_storage.ko kernel/drivers/usb/gadget/libcomposite.ko
-kernel/drivers/usb/gadget/libcomposite.ko:
-kernel/drivers/usb/mon/usbmon.ko:
