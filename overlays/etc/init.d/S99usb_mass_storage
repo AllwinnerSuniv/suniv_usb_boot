@@ -9,8 +9,8 @@ case "$1" in
         modprobe g_mass_storage file=/dev/mtdblock0 removable=1 
         [ $? = 0 ] && echo "OK" || echo "FAIL"
 
-        echo "enable led trigger for MTD activity"
-        echo mtd > /sys/class/leds/status_led/trigger
+        #echo "enable led trigger for MTD activity"
+        #echo mtd > /sys/class/leds/status_led/trigger
         ;;
     stop)
         printf "Stopping modprobe g_mass_storage: "
