@@ -1,0 +1,15 @@
+u-boot-sunxi-with-spl-spinand.bin u-boot-sunxi-with-spl.bin 2048 512
+SPL-size 24576
+u-boot-size 363008
+block-size 1 KiB
+Page-size 2 KiB
+PEB-size 512 KiB
+SPL-count 1
+u-boot-count 1
+SPL-entry-steps 0x10000
+SPL-blocks 24
+u-boot-block 512
+first-u-boot 512
+## Layout ##
+spl-0 0x0
+u-boot-0 0x80000
