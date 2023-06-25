@@ -8,3 +8,4 @@ kernel/drivers/mtd/tests/mtd_subpagetest.ko:
 kernel/drivers/mtd/tests/mtd_torturetest.ko:
 kernel/drivers/mtd/tests/mtd_nandecctest.ko:
 kernel/drivers/mtd/tests/mtd_nandbiterrs.ko:
+kernel/drivers/usb/mon/usbmon.ko:
