@@ -6,4 +6,12 @@ echo 8192 > /proc/sys/vm/min_free_kbytes
 
 echo heartbeat > /sys/class/leds/status_led/trigger
 
-insmod /opt/ssd1327_fb.ko && echo 0 > /sys/class/graphics/fbcon/cursor_blink
+insmod /opt/ssd1327_fb.ko
+
+# run a getty on tty0
+# setsid sh -c 'exec /sbin/getty -L tty0 0 vt100 <> /dev/tty0 >&0 2>&1'
+
+# set usb to host mode
+echo 132 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio132/direction
+echo 1 > /sys/class/gpio/gpio132/value
