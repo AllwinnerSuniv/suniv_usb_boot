@@ -1,17 +1,35 @@
 #!/bin/sh
+#                          
+# System setup and shutdown
 
-# buff/cache autoclean
-printf "setting up min_free_kbytes to 8192\n"
-echo 8192 > /proc/sys/vm/min_free_kbytes
 
-echo heartbeat > /sys/class/leds/status_led/trigger
+case "$1" in
+        start)
+        # buff/cache autoclean
+        printf "setting up min_free_kbytes to 8192 ...\n"
+        echo 8192 > /proc/sys/vm/min_free_kbytes         
+                                                
+        echo heartbeat > /sys/class/leds/status_led/trigger
+                                                           
+        # keep cursor blink
+        insmod /opt/fb_ssd1327.ko
+                                 
+        # set usb to host mode
+        printf "setting usb to host mode ...\n"
+        echo 132 > /sys/class/gpio/export      
+        echo out > /sys/class/gpio/gpio132/direction
+        echo 1 > /sys/class/gpio/gpio132/value      
+        insmod /opt/g_ether.ko                
+        ;;                    
+        stop)
+        printf "system shutting down ...\n"
+        rmmod g_ether                                              
+        echo 0 > /sys/class/gpio/gpio132/value  # disable usb power
+        ;;                                                         
+        *)                           
+        echo "usage: $0 {start|stop}"
+        exit 1                       
+esac          
+       
+exit $?
 
-insmod /opt/ssd1327_fb.ko
-
-# run a getty on tty0
-# setsid sh -c 'exec /sbin/getty -L tty0 0 vt100 <> /dev/tty0 >&0 2>&1'
-
-# set usb to host mode
-echo 132 > /sys/class/gpio/export
-echo out > /sys/class/gpio/gpio132/direction
-echo 1 > /sys/class/gpio/gpio132/value
