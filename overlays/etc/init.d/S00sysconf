@@ -12,6 +12,7 @@ case "$1" in
 	insmod /opt/fb_ssd1327.ko
         insmod /opt/g_ether.ko
 
+	ifconfig usb0 192.168.6.1
 	dhcpd usb0&
         ;;
         stop)
