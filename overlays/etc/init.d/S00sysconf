@@ -6,30 +6,22 @@
 case "$1" in
         start)
         # buff/cache autoclean
-        printf "setting up min_free_kbytes to 8192 ...\n"
-        echo 8192 > /proc/sys/vm/min_free_kbytes         
-                                                
         echo heartbeat > /sys/class/leds/status_led/trigger
-                                                           
+
         # keep cursor blink
-        insmod /opt/fb_ssd1327.ko
-                                 
-        # set usb to host mode
-        printf "setting usb to host mode ...\n"
-        echo 132 > /sys/class/gpio/export      
-        echo out > /sys/class/gpio/gpio132/direction
-        echo 1 > /sys/class/gpio/gpio132/value      
-        insmod /opt/g_ether.ko                
-        ;;                    
+	insmod /opt/fb_ssd1327.ko
+        insmod /opt/g_ether.ko
+
+	dhcpd usb0&
+        ;;
         stop)
         printf "system shutting down ...\n"
-        rmmod g_ether                                              
-        echo 0 > /sys/class/gpio/gpio132/value  # disable usb power
-        ;;                                                         
-        *)                           
+	killall dhcpd
+        rmmod g_ether
+        ;;
+        *)
         echo "usage: $0 {start|stop}"
-        exit 1                       
-esac          
-       
-exit $?
+        exit 1
+esac
 
+exit $?
